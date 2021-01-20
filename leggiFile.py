@@ -1,3 +1,11 @@
+from tkinter import *
+root = Tk()  
+root.geometry('300x300') 
+l=Label(root,text="Maschera Grafico")
+b=Button(root,text="close window")
+l.pack() 
+b.pack()
+root.mainloop()
 
 import string
 import numpy as np
