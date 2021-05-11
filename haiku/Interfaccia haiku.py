@@ -1,20 +1,21 @@
-import tkinter as tk
+from tkinter import *
+from tkinter import messagebox
 
-window = tk.Tk()
-window.geometry("540x400")
-window.title("GENERATORE CASUALE DI HAIKU")
-window.resizable(False, False)
-window.configure(background="Light blue")
+top = Tk()
+
+C = Canvas(top, bg="blue", height=320, width=330)
+filename = PhotoImage(file = "C:\\Users\\Todino Family\\Desktop\\haiku\\cornice.png")
+background_label = Label(top, image=filename)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+C.pack()
+def toggle_color(last=[0]):       
+    colors = ['red', 'blue', 'green', 'purple', 'yellow']
+    color = colors[last[0]]
+    last[0] = (last[0] + 1) % 5    
+    first_button.config(fg=color)         
+first_button = Button(text="GENERA", command=toggle_color, font=("Times",30))
+first_button.place(x=70, y=50)
 
 
-
-testo = tk.Label(text="Questo è un generatore randomico di haiku. Per visualizzare un haiku clicca su GENERA", fg="red", font=("Times", 12))
-testo.grid()
-first_button = tk.Button(text="GENERA", fg="blue", font=("Times",25))
-first_button.grid(padx=100, pady=0)
-
-
-
-
-if __name__ == "__main__":
-    window.mainloop()
+top.mainloop()
