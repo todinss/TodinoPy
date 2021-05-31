@@ -1,6 +1,6 @@
 # File Readme
 ## **DIVISIONE DEI RUOLI**
-- **Todino** : creazione del **codice** .  
+- **Ferrigno** : creazione del **codice** .  
 - **Fulgione** : creazione dell'**interfaccia** .
-- **Ferrigno** : creazione dell'**interfaccia** e **file.json** .
+- **Todino** : creazione dell'**interfaccia** e **file.json** .
 - **Kunz** : creazione del file "**README.md**".
