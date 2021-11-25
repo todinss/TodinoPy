@@ -1,8 +1,6 @@
 # La classe retta
 
 class retta:
-    def __init__(self,a,b,c,):
-
     def __init__(self, tipo="param", p1=None, p2=None, p3=None, p4=None):
         if tipo == "param":
             self.__a = p1
