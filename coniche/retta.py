@@ -8,14 +8,18 @@ class retta:
             self.__c = p3
             self.__punti = []
             self.__m = p4
+        
+        elif tipo == "punti":
+            self.__x = p1
+            self.__y = p2
+            self.__x2 = p3
+            self.__y2 = p4
+            self.__m = ((self.__y2 - self.__y) / (self.__x2 - self.__x))
+            self.__q = (-(m * self.__x)) + self.__y
+            self.__b = 1
+            self.__a = -m
+            self.__c = -self.__q
     
-    def __init__(self, p1, p2):
-        '''
-        questo costruttore deve generare una retta a partire da due punti.
-        p1 e p2 sono tuple che identificano le coordinate dei punti a partire
-        dai quali vanno ricavati a,b e c ed inizializzati gli attributi di istanza
-        '''
-
  def getA(self):
         return f"\n a = {self.__a}"
     
