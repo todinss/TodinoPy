@@ -16,3 +16,11 @@ class parabola:
     
     def getC(self):
         return self.__c
+    
+    def fuoco(self, x, y):
+         self.__x = (-self.__b) / (self.__a * 2)
+         self.__y = (-(self.__b * self.__b) - 4 * self.__a * sefl.__c) / 4 * self.__a
+        
+    def direttrice(self, c2):
+        self.__c2 = (-1 - ((self.__b * self.__b) - 4 * self.__a * sefl.__c)) / 4 * self.__a
+        return self.__c2
