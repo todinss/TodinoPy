@@ -1,6 +1,4 @@
-# La classe retta
-
-class retta:
+class Retta:
     def __init__(self, tipo="param", p1=None, p2=None, p3=None, p4=None):
         if tipo == "param":
             self.__a = p1
@@ -8,91 +6,87 @@ class retta:
             self.__c = p3
             self.__punti = []
             self.__m = p4
-        
+
         elif tipo == "punti":
             self.__x = p1
             self.__y = p2
             self.__x2 = p3
             self.__y2 = p4
             self.__m = ((self.__y2 - self.__y) / (self.__x2 - self.__x))
-            self.__q = (-(m * self.__x)) + self.__y
+            self.__q = (-(self.__m * self.__x)) + self.__y
             self.__b = 1
-            self.__a = -m
+            self.__a = -self.__m
             self.__c = -self.__q
-    
- def getA(self):
-        return f"\n a = {self.__a}"
-    
+            self.__punti = []
+
+        elif tipo == "coeff":
+            self.__m = p4
+            self.__x = p1
+            self.__y = p2
+            self.__q = (-(self.__m * self.__x)) + self.__y
+            self.__b = 1
+            self.__a = -self.__m
+            self.__c = -self.__q
+            self.__punti = []
+
+    def getA(self):
+        return self.__a
+
     def getB(self):
-        return f"\n b = {self.__b}"
+        return self.__b
 
     def getC(self):
-        return f"\n c = {self.__c}"
-
-    def eqEsplicita(self):
-        if self.__b == 0:
-            return f"\nForma esplicita dell'equazione: \n L'equazione è impossibile"
-        elif self.__a == 0:
-            return f"\nForma esplicita dell'equazione: \n y = {-self.__c / self.__b}"
-        elif self.__c == 0:
-            return f"\nForma esplicita dell'equazione: \n y = {-self.__a / self.__b}"
-        else:
-            return f"\nForma esplicita dell'equazione: \n y = {-self.__a / self.__b}x + {-self.__c / self.__b}"
+        return self.__c
 
     def eqImplicita(self):
         if self.__b == 0:
-            return f"\nForma implicita dell'equazione:\n {self.__a}x + {self.__c} = 0"       
-        elif self.__a == 0:
-            return f"\nForma implicita dell'equazione:\n {self.__b}y + {self.__c} = 0"    
+            return f"{self.__a}x+{self.__c}=0"
         elif self.__c == 0:
-            return f"\nForma implicita dell'equazione:\n {self.a}x + {self.__b}y = 0"    
-        else:   
-            return f"\nForma implicita dell'equazione:\n {self.__a}x + {self.__b}y + {self.__c} = 0 "
-
-    def Y(self, x):
-         self.__x = float(x)
-            if self.__b == 0:
-            return f"\nla retta è parallela all'asse delle Y"
+            return f"{self.__a}x+{self.__b}y=0"
         elif self.__a == 0:
-            return f" y = {-self.__c / self.__b}"
-        elif self.__c == 0:
-            return f" y = {-self.__a * self.__x / self.__b}" 
+            return f"{self.__b}y+{self.__c}=0"
         else:
-            return f"\n Y: \n y = {-self.__a / self.__b}*x + {-self.__c / self.__b}"
+            return f"{self.__a}x+{self.__b}y+{self.__c}"
 
-    def punti(self, N, M):
-        self.__N = int(N)
-        self.__M = int(M)
-    
-        for self.__N in range (self.__M):
-            tupla = (self.__x, (-self.__a * self.__x) / self.__b + (-self.__c / self.__b))
-            self.__x = self.__x + 1
+    def eqEsplicita(self):
+        if self.__b == 0:
+            return f"x={-self.__c}/{self.__a}"
+        elif self.__c == 0:
+            return f"y={-self.__a}x/{self.__b}"
+        elif self.__a == 0:
+            return f"y={-self.__c}/{self.__b}"
+        else:
+            return f"y={-self.__a / self.__b}x+{-self.__c / self.__b}"
+
+    def trovaY(self, x):
+        y = ((-self.__a * x) / self.__b + (-self.__c / self.__b))
+        return y
+
+    def punti(self, N, M, x):
+        for N in range(M, x):
+            tupla = (x, self.trovaY(x))
+            x = x + 1
             self.__punti.append(tupla)
-        return f"\n Le coordinate dei punti appartenenti alla retta sono: \n {self.__punti}"
+            return f"Coordinate dei punti: {self.__punti}"
 
     def m(self):
         if self.__b == 0:
-            return f"\nCoefficiente angolare: \n Il coefficiente angolare non è definito; la retta è parallela all'asse y"
+            return f"La retta è parallela all'asse delle ordinate"
+        elif self.__a == 0:
+            return f"La retta è perpendicolare all'asse delle ascisse"
         else:
-            return f"\nCoefficiente angolare: \n m = {-self.__b / self.__a}"
+            self.__m = -self.__a / self.__b
+            return self.__m
 
-    def intersezione(self, s):
-         def instersezione(self, a1 , b1 , c1):
-        self.__a1 = int(a1)
-        self.__b1 = int(b1)
-        self.__c1 = int(c1)
-        if (-self.__b / self.__a) == (-self.__b1 / self.__a1):
-            if self.__c == self.__c1:
-                return f"\nLe rette sono coincidenti \n {self.__punti}"
-            else:
-                return f"Null"
-        elif self.__c == self.__c1:
-            return f"\nIl putnto di incontro delle due rette è: (0, {self.__c})" 
+    def intersezione(self, a1, b1, c1, m1):
+        if m1 == self.__m:
+            return f"null"
+
+        elif m1 == self.__m and (-self.__c / self.__b) == (-c1 / b1):
+            return self.__punti
+
         else:
-            return f"\nLe rette sono incidenti e la coordinata del punto d'incidenza è: ({((-self.__c / self.__b)+(self.__c1 / self.__b1))/((-self.__b / self.__a)+(self.__b1 / self.__a1))}, {((-self.__b / self.__c)+(self.__b1 / self.__c1))/((-self.__b / self.__a)+(self.__b1 / self.__a1))})"
-
-print(valori.Implicita())
-print(valori.Esplicita())
-print(valori.m())
-print(valori.trovaY(input('x = ')))
-print(valori.instersezione(input('a1 = ' ), input('b1 = ' ), input('c1 = ' )))
+            intersezione = (
+                ((-self.__c / self.__b) + (c1 / b1)) / ((-self.__b / self.__a) + (b1 / a1)),
+                ((-self.__b / self.__c) + (b1 / c1)) / ((-self.__b / self.__a) + (b1 / a1)))
+            return intersezione
